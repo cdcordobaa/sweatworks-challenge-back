@@ -1,4 +1,4 @@
-import { Connection, ConnectionManager, ConnectionOptions, DefaultNamingStrategy, getConnectionManager } from 'typeorm';
+import { Connection, ConnectionManager, ConnectionOptions, DefaultNamingStrategy, getConnectionManager, createConnection } from 'typeorm';
 import { RelationIdLoader } from 'typeorm/query-builder/RelationIdLoader';
 import { RelationLoader } from 'typeorm/query-builder/RelationLoader';
 import config from '../../ormconfig';
@@ -6,6 +6,9 @@ import config from '../../ormconfig';
 /**
  * Database manager class
  */
+
+
+
 export class Database {
     private connectionManager: ConnectionManager;
 
@@ -41,25 +44,29 @@ export class Database {
     }
 
     public async getConnection(): Promise<Connection> {
-        try {
-            console.log('Establishing connection...');
-            this.connectionManager = getConnectionManager();
-            let connection: Connection;
+        // try {
+        //     console.log('Establishing connection...');
+        //     this.connectionManager = getConnectionManager();
+        //     let connection: Connection;
 
-            if (this.connectionManager.has('default') && this.connectionManager.get('default').isConnected) {
-                console.log('Reusing connection...');
-                connection = this.injectConnectionOptions();
-            } else {
-                console.log('Creating new connection...');
-                connection = this.connectionManager.create(config);
-                await connection.connect();
-            }
-            console.log('Connection established');
-            return connection;
-        } catch (e) {
-            console.error(e);
-            throw e;
-        }
+        //     if (this.connectionManager.has('default') && this.connectionManager.get('default').isConnected) {
+        //         console.log('Reusing connection...');
+        //         connection = this.injectConnectionOptions();
+        //     } else {
+        //         console.log('Creating new connection...');
+        //         console.log("with", config)
+        //         connection = this.connectionManager.create(config);
+        //         console.log("the con", connection)
+        //         await connection.connect();
+        //     }
+        //     console.log('Connection established');
+        //     return connection;
+        // } catch (e) {
+        //     console.error(e);
+        //     throw e;
+        // }
+
+        return await createConnection(config);
     }
 
     public async getEmptyDataConnection(): Promise<Connection> {

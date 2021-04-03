@@ -7,7 +7,7 @@ const config: ConnectionOptions = {
     synchronize: true, // Use true for local development
     migrationsRun: true,
     logging: true,
-    host: process.env.DB_HOST || '0.0.0.0',
+    host: process.env.DB_HOST || 'localhost',
     username: process.env.DB_USERNAME || 'postgres',
     database: process.env.DB_NAME || 'sweatworks',
     password: process.env.DB_PASSWORD || 'postgres',
