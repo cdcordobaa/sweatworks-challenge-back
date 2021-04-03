@@ -31,6 +31,27 @@ functions:
                   path: handshake
                   method: get
                   cors: true
+    password-signup:
+        handler: build/handlers/user/controller.signUp
+        events:
+            - http:
+                  path: signup
+                  method: post
+                  cors: true
+    login:
+        handler: build/handlers/user/controller.logIn
+        events:
+            - http:
+                  path: login
+                  method: post
+                  cors: true
+    update-password:
+        handler: build/handlers/user/controller.updatePassword
+        events:
+            - http:
+                  path: password-update
+                  method: post
+                  cors: true
 custom:
     serverless-offline:
         host: 0.0.0.0

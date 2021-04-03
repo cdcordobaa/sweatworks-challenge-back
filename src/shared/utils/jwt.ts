@@ -5,7 +5,7 @@ import { AuthResponseCodes } from '../constants/responseCodes/auth';
 import { User } from '../../entities/User';
 import { DecodedToken } from '../types/auth';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET =  'pizzahut';
 
 export const decodeToken = (headers: APIGatewayProxyEventHeaders): DecodedToken => {
     if (!headers || !headers.Authorization) {
@@ -38,7 +38,7 @@ export const decodeToken = (headers: APIGatewayProxyEventHeaders): DecodedToken 
 };
 
 export const generateUserToken = (user: User) => {
-    const options: jwt.SignOptions = { algorithm: 'RS256' };
+    // const options: jwt.SignOptions = { algorithm: 'RS256' };
 
-    return jwt.sign({ id: user.id, email: user.email }, JWT_SECRET as string, options);
+    return jwt.sign({ id: user.id, email: user.email }, JWT_SECRET as string);
 };
