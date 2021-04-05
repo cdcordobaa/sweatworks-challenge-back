@@ -1,6 +1,7 @@
-export interface AuthorType{
+export interface AuthorType {
     firstName: string;
     lastName: string;
     email: string;
-    birthDate: string;
+    birthDate?: string;
+    photo?: string;
 }

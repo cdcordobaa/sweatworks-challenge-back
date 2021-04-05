@@ -28,13 +28,6 @@ export const logIn = async (event: APIGatewayEvent): Promise<APIGatewayProxyResu
                 statusCode: AuthResponseCodes.WRONG_EMAIL_OR_PASSWORD,
             };
 
-        if (!user.password)
-            throw {
-                message: `User exists with social network`,
-                code: 401,
-                statusCode: AuthResponseCodes.USER_EXIST_SOCIAL_NETWORK,
-            };
-
         const verifiedPassword = await verifyPassword(user.password, password);
 
         if (!verifiedPassword)

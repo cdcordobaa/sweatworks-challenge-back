@@ -1,5 +1,7 @@
 export enum AuthorResponseCodes {
     AUTHOR_CREATED = 'ATOR-C00',
+    AUTHOR_UPDATED = 'ATOR-U00',
     ALREADY_EXISTS = 'ATOR-E02',
     SUCCESS_GETALL = 'ATOR-S00',
+    ERROR_PATH = 'ATOR-400',
 }

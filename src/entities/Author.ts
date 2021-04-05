@@ -14,7 +14,10 @@ export class Author {
     @Column()
     email: string;
 
-    @Column()
+    @Column({ nullable: true })
+    photo?: string;
+
+    @Column({ nullable: true })
     birth_date?: string;
 
     @CreateDateColumn()
