@@ -31,27 +31,64 @@ functions:
                   path: handshake
                   method: get
                   cors: true
-    password-signup:
+    signUp:
         handler: build/handlers/user/controller.signUp
         events:
             - http:
                   path: signup
                   method: post
                   cors: true
-    login:
+    logIn:
         handler: build/handlers/user/controller.logIn
         events:
             - http:
                   path: login
                   method: post
                   cors: true
-    update-password:
+    updatePassword:
         handler: build/handlers/user/controller.updatePassword
         events:
             - http:
                   path: password-update
                   method: post
                   cors: true
+    getAllAuthors:
+        handler: build/handlers/author/controller.getAllAuthors
+        events:
+            - http:
+                  path: author
+                  method: get
+                  cors: true
+    getAuthor:
+        handler: build/handlers/author/controller.getAuthor
+        events:
+            - http:
+                  path: author/{id}
+                  method: get
+                  cors: true
+    createAuthor:
+        handler: build/handlers/author/controller.createAuthor
+        events:
+            - http:
+                  path: author
+                  method: post
+                  cors: true
+    updateAuthor:
+        handler: build/handlers/author/controller.updateAuthor
+        events:
+            - http:
+                  path: author/{id}
+                  method: put
+                  cors: true
+    deleteAuthor:
+        handler: build/handlers/author/controller.deleteAuthor
+        events:
+            - http:
+                  path: author/{id}
+                  method: delete
+                  cors: true
+
+                  
 custom:
     serverless-offline:
         host: 0.0.0.0
