@@ -9,7 +9,6 @@ import { objToCamel } from '../../shared/utils/tranformers';
 export const getAllAuthors = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
     return await handlerWrapper(event, async dbConn => {
         const authors: Author[] = await getAuthors(dbConn);
-
         return {
             data: {
                 authors: authors.map(atr => objToCamel(atr)),
@@ -31,7 +30,6 @@ export const createAuthor = async (event: APIGatewayEvent): Promise<APIGatewayPr
             birthDate,
             photo,
         };
-
         if (await findAuthorByEmail(dbConn, email)) {
             throw {
                 message: `Author with the email ${email} already exists`,
@@ -39,7 +37,6 @@ export const createAuthor = async (event: APIGatewayEvent): Promise<APIGatewayPr
                 statusCode: ResCodes.ALREADY_EXISTS,
             };
         }
-
         const dbAuthor = await createAuthorDB(dbConn, author);
         return {
             data: {
@@ -54,7 +51,6 @@ export const createAuthor = async (event: APIGatewayEvent): Promise<APIGatewayPr
 export const getAuthor = async (event: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
     return await handlerWrapper(event, async dbConn => {
         const id = event.pathParameters?.id;
-
         if (!id) {
             throw {
                 message: `incorrect path or params`,
@@ -67,8 +63,8 @@ export const getAuthor = async (event: APIGatewayEvent): Promise<APIGatewayProxy
         if (!author) {
             throw {
                 message: `Author do not exists`,
-                code: 302,
-                statusCode: ResCodes.ALREADY_EXISTS,
+                code: 402,
+                statusCode: ResCodes.AUTHOR_NOT_EXIST,
             };
         }
         return {
@@ -76,7 +72,7 @@ export const getAuthor = async (event: APIGatewayEvent): Promise<APIGatewayProxy
                 author: author,
             },
             code: 200,
-            statusCode: ResCodes.SUCCESS_GETALL,
+            statusCode: ResCodes.SUCCESS_GET_AUTHR,
         };
     });
 };
@@ -85,7 +81,6 @@ export const updateAuthor = async (event: APIGatewayEvent): Promise<APIGatewayPr
     return await handlerWrapper(event, async dbConn => {
         const { firstName, lastName, email, birthDate, photo } = JSON.parse(event.body as string);
         const id = event.pathParameters?.id;
-
         if (!id) {
             throw {
                 message: `incorrect path or params`,
@@ -130,13 +125,12 @@ export const deleteAuthor = async (event: APIGatewayEvent): Promise<APIGatewayPr
                 statusCode: ResCodes.ERROR_PATH,
             };
         }
-
         const deletedAuthor = await deleteAuthorById(dbConn, id);
         if (!deletedAuthor) {
             throw {
                 message: `Author do not exists`,
-                code: 302,
-                statusCode: ResCodes.ALREADY_EXISTS,
+                code: 402,
+                statusCode: ResCodes.AUTHOR_NOT_EXIST,
             };
         }
         return {
@@ -144,7 +138,7 @@ export const deleteAuthor = async (event: APIGatewayEvent): Promise<APIGatewayPr
                 author: deletedAuthor,
             },
             code: 200,
-            statusCode: ResCodes.SUCCESS_GETALL,
+            statusCode: ResCodes.SUCCESS_DELTED_AUTHR,
         };
     });
 };
