@@ -1,24 +1,24 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 
 @Entity()
-export class User2 {
+export class Author {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
-    name: string;
+    first_name: string;
+
+    @Column()
+    last_name: string;
 
     @Column()
     email: string;
 
-    @Column({ select: false, nullable: true })
-    password: string;
+    @Column({ nullable: true })
+    photo?: string;
 
     @Column({ nullable: true })
-    profile_picture?: string;
-
-    @Column({ default: true })
-    is_active: boolean;
+    birth_date?: string;
 
     @CreateDateColumn()
     created_at: Date;

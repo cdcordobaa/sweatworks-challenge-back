@@ -12,10 +12,8 @@ export const handlerWrapper = async <T>(
     event: lambda.APIGatewayProxyEvent,
     operation: (connection: Connection, decodeToken?: DecodedToken) => Promise<ResponseObject>,
 ): Promise<lambda.APIGatewayProxyResult> => {
-    console.log("wuups here", event)
     try {
         const connection: Connection = await database.getConnection();
-        console.log("this is conecting",connection)
         let res: ResponseObject;
         if (event.headers.Authorization) {
             const decodedToken = decodeToken(event.headers);
