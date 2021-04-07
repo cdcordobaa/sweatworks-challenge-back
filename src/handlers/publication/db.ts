@@ -71,7 +71,6 @@ export const deletePublicationById = async (dbConn: Connection, id: string): Pro
     let existingPublication: Publication | undefined = await dbConn.manager
         .getRepository(Publication)
         .findOne({ where: { id } });
-    console.log('the found thing', existingPublication);
     if (!existingPublication) return undefined;
     return dbConn.manager.softRemove(existingPublication);
 };
