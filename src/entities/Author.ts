@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany } from 'typeorm';
+import { Publication } from './Publication';
 
 @Entity()
 export class Author {
@@ -25,4 +26,10 @@ export class Author {
 
     @UpdateDateColumn()
     updated_at: Date;
+
+    @ManyToMany(
+        () => Publication,
+        publication => publication.authors,
+    )
+    publications: Publication[];
 }
