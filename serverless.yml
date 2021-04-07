@@ -87,8 +87,42 @@ functions:
                   path: author/{id}
                   method: delete
                   cors: true
+    getAllPublications:
+        handler: build/handlers/publication/controller.getAllPublications
+        events:
+            - http:
+                  path: publication
+                  method: get
+                  cors: true
+    getPublication:
+        handler: build/handlers/publication/controller.getPublication
+        events:
+            - http:
+                  path: publication/{id}
+                  method: get
+                  cors: true
+    createPublication:
+        handler: build/handlers/publication/controller.createPublication
+        events:
+            - http:
+                  path: publication
+                  method: post
+                  cors: true
+    updatePublication:
+        handler: build/handlers/publication/controller.updatePublication
+        events:
+            - http:
+                  path: publication/{id}
+                  method: put
+                  cors: true
+    deletePublication:
+        handler: build/handlers/publication/controller.deletePublication
+        events:
+            - http:
+                  path: publication/{id}
+                  method: delete
+                  cors: true
 
-                  
 custom:
     serverless-offline:
         host: 0.0.0.0
